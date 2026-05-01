@@ -70,13 +70,16 @@ function getProjectSlugFromHash() {
 }
 
 function handleNavClick(e) {
+  e.preventDefault();
+
   const targetId = e.currentTarget.getAttribute("href").replace("#", "");
 
   requestAnimationFrame(() => {
     document.getElementById(targetId)?.scrollIntoView();
   });
-}
 
+  window.location.hash = targetId;
+}
 function SiteNav() {
   return (
     <nav className="nav">
@@ -320,7 +323,7 @@ function App() {
     }
 
     window.addEventListener("hashchange", handleHashChange);
-
+    handleHashChange();
     return () => {
       window.removeEventListener("hashchange", handleHashChange);
     };
