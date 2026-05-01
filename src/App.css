@@ -44,13 +44,21 @@ a {
   position: sticky;
   top: 0;
   z-index: 10;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  display: flex;
+  border-bottom: 1px solid var(--line);
+  background: rgba(7, 7, 8, 0.9);
+}
+
+.nav-inner {
+  width: min(1120px, calc(100% - 40px));
   min-height: 78px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  border-bottom: 1px solid var(--line);
-  background: rgba(7, 7, 8, 0.9);
+  margin: 0 auto;
 }
 
 .logo {
@@ -180,17 +188,28 @@ h3 {
   background:
     linear-gradient(160deg, rgba(225, 29, 46, 0.12), transparent 48%),
     var(--panel);
-  color: #efe6e2;
-  font-family: Consolas, monospace;
-  line-height: 1.9;
+  color: var(--muted);
+  line-height: 1.65;
 }
 
-.hero-panel p {
+.hero-panel h2 {
+  margin: 0 0 20px;
+  color: var(--text);
+  font-size: 1.45rem;
+  line-height: 1.15;
+}
+
+.hero-panel ul {
+  display: grid;
+  gap: 14px;
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.hero-panel span {
-  color: var(--red-bright);
+.hero-panel li {
+  padding-left: 16px;
+  border-left: 3px solid var(--red);
 }
 
 .section {
@@ -206,12 +225,25 @@ h3 {
 }
 
 .project-card {
+  display: block;
   padding: 28px;
   border: 1px solid rgba(255, 255, 255, 0.11);
   border-radius: var(--radius);
   background:
     linear-gradient(180deg, rgba(225, 29, 46, 0.1), rgba(225, 29, 46, 0.02)),
     var(--panel-strong);
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.project-card:hover {
+  border-color: rgba(255, 57, 75, 0.44);
+  background:
+    linear-gradient(180deg, rgba(225, 29, 46, 0.16), rgba(225, 29, 46, 0.04)),
+    var(--panel-strong);
+  transform: translateY(-2px);
 }
 
 .project-card p {
@@ -240,7 +272,99 @@ h3 {
   font-weight: 900;
 }
 
-.about {
+.project-detail {
+  padding: 64px 0 100px;
+}
+
+.back-link {
+  display: inline-flex;
+  margin-bottom: 34px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.back-link:hover,
+.project-link:hover {
+  color: var(--red-bright);
+}
+
+.project-detail-header {
+  max-width: 860px;
+}
+
+.project-detail-header h1 {
+  font-size: clamp(3rem, 7vw, 5.4rem);
+}
+
+.detail-intro {
+  max-width: 780px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 18px;
+  margin-top: 54px;
+}
+
+.detail-panel {
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.detail-panel h2,
+.project-gallery h2 {
+  margin: 0 0 18px;
+  font-size: 1.55rem;
+}
+
+.detail-panel p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.detail-panel p + p {
+  margin-top: 16px;
+}
+
+.project-gallery {
+  margin-top: 54px;
+}
+
+.gallery-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.gallery-grid figure {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: var(--radius);
+  background: var(--panel-strong);
+}
+
+.gallery-grid img {
+  width: 100%;
+  display: block;
+}
+
+.gallery-grid figcaption {
+  padding: 12px 16px 14px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.about,
+.resume {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
   gap: 56px;
@@ -254,6 +378,28 @@ h3 {
 
 .about-copy p {
   margin: 0;
+}
+
+.resume-card {
+  display: grid;
+  gap: 22px;
+  max-width: 620px;
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(225, 29, 46, 0.1), rgba(225, 29, 46, 0.02)),
+    var(--panel-strong);
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.resume-card p {
+  margin: 0;
+}
+
+.resume-card .button {
+  width: fit-content;
 }
 
 .contact {
@@ -295,15 +441,22 @@ h3 {
   }
 
   .nav {
+    padding: 0;
+  }
+
+  .nav-inner {
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
     padding: 16px 0;
+    width: min(100% - 28px, 720px);
   }
 
   .hero,
   .about,
-  .project-grid {
+  .resume,
+  .project-grid,
+  .detail-grid {
     grid-template-columns: 1fr;
   }
 
@@ -320,7 +473,8 @@ h3 {
   }
 
   .buttons,
-  .button {
+  .button,
+  .resume-card .button {
     width: 100%;
   }
 
