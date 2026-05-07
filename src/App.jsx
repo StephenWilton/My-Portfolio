@@ -181,7 +181,7 @@ function HomePage() {
       <section className="hero" id="top">
         <div className="hero-copy">
           <p className="eyebrow">Computer Programmer Analyst Graduate</p>
-          <h1>Backend Developer.</h1>
+          <h1>Junior Developer.</h1>
           <p className="hero-intro">
             I build backend services, databases, and game systems with clean,
             practical logic.
